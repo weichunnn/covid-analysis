@@ -15,22 +15,24 @@
     {
       "width": 1000,
       "height": 400,
+      "encoding": {
+        "x": {
+          "field": "date",
+          "type": "temporal",
+          "scale": { "domain": { "param": "brush" } },
+          "axis": { "title": "", "grid": false }
+        },
+        "y": {
+          "field": "cases_new",
+          "type": "quantitative",
+          "axis": { "title": "Daily Covid-19 Cases" },
+          "scale": { "domain": [0, 40000] }
+        }
+      },
       "layer": [
         {
           "mark": { "type": "bar", "size": 2, "color": "#3B82F6" },
           "encoding": {
-            "x": {
-              "field": "date",
-              "type": "temporal",
-              "scale": { "domain": { "param": "brush" } },
-              "axis": { "title": "", "grid": false }
-            },
-            "y": {
-              "field": "cases_new",
-              "type": "quantitative",
-              "axis": { "title": "Daily Covid-19 Cases" },
-              "scale": { "domain": [0, 40000] }
-            },
             "color": {
               "field": "placeholder",
               "scale": { "range": ["#3B82F6"] },
@@ -41,25 +43,12 @@
                 "legendX": 850,
                 "legendY": 15
               }
-            },
-            "tooltip": [
-              { "field": "date", "type": "temporal", "title": "Date" },
-              {
-                "field": "cases_new",
-                "type": "quantitative",
-                "title": "Number of Cases"
-              }
-            ]
+            }
           }
         },
         {
           "mark": { "type": "line", "color": "#101826", "size": 3 },
           "encoding": {
-            "x": {
-              "field": "date",
-              "type": "temporal",
-              "scale": { "domain": { "param": "brush" } }
-            },
             "y": { "field": "rolling_mean", "type": "quantitative" },
             "stroke": {
               "field": "placeholder-2",
@@ -71,46 +60,30 @@
                 "title": "",
                 "labelExpr": "'30 Days Rolling Average'"
               }
-            },
-            "tooltip": [
-              {
-                "field": "rolling_mean",
-                "type": "quantitative",
-                "title": "30 Days Rolling Average"
-              }
-            ]
-          }
-        },
-        {
-          "transform": [{ "filter": { "param": "hover", "empty": false } }],
-          "mark": "point",
-          "encoding": {
-            "x": {
-              "field": "date",
-              "type": "temporal",
-              "scale": { "domain": { "param": "brush" } }
-            },
-            "y": { "field": "rolling_mean", "type": "quantitative" }
+            }
           }
         },
         {
           "mark": "rule",
           "encoding": {
-            "x": {
-              "field": "date",
-              "type": "temporal",
-              "scale": { "domain": { "param": "brush" } }
-            },
+            "y": {},
             "opacity": {
               "condition": { "value": 1, "param": "hover", "empty": false },
               "value": 0
             },
             "tooltip": [
-              { "field": "AAPL", "type": "quantitative" },
-              { "field": "AMZN", "type": "quantitative" },
-              { "field": "GOOG", "type": "quantitative" },
-              { "field": "IBM", "type": "quantitative" },
-              { "field": "MSFT", "type": "quantitative" }
+              { "field": "date", "type": "temporal", "title": "Date" },
+              {
+                "field": "cases_new",
+                "type": "quantitative",
+                "title": "Number of Cases"
+              },
+              {
+                "field": "rolling_mean",
+                "type": "quantitative",
+                "title": "30 Days Rolling Average",
+                "format": ".0f"
+              }
             ]
           },
           "params": [
@@ -125,6 +98,18 @@
               }
             }
           ]
+        },
+        {
+          "transform": [{ "filter": { "param": "hover", "empty": false } }],
+          "mark": "point",
+          "encoding": {
+            "y": { "field": "rolling_mean", "type": "quantitative" }
+          }
+        },
+        {
+          "transform": [{ "filter": { "param": "hover", "empty": false } }],
+          "mark": "point",
+          "encoding": { "y": { "field": "cases_new", "type": "quantitative" } }
         }
       ]
     },

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/epidemic/cases_malaysia.csv"
+  },
+  "transform": [
+    { "calculate": "timeParse(datum['date'], '%Y-%m-%d')", "as": "date" },
+    { "filter": { "timeUnit": "year", "field": "date", "equal": 2022 } },
+    {
+      "window": [{ "field": "cases_new", "op": "mean", "as": "rolling_mean" }],
+      "frame": [-15, 15]
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 1000,
+      "height": 400,
+      "layer": [
+        {
+          "mark": { "type": "bar", "size": 2, "color": "#3B82F6" },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "scale": { "domain": { "param": "brush" } },
+              "axis": { "title": "", "grid": false }
+            },
+            "y": {
+              "field": "cases_new",
+              "type": "quantitative",
+              "axis": { "title": "Daily Covid-19 Cases" },
+              "scale": { "domain": [0, 40000] }
+            },
+            "color": {
+              "field": "placeholder",
+              "scale": { "range": ["#3B82F6"] },
+              "legend": {
+                "title": "Legend",
+                "labelExpr": "'Daily Cases'",
+                "orient": "none",
+                "legendX": 850,
+                "legendY": 15
+              }
+            },
+            "tooltip": [
+              { "field": "date", "type": "temporal", "title": "Date" },
+              {
+                "field": "cases_new",
+                "type": "quantitative",
+                "title": "Number of Cases"
+              }
+            ]
+          }
+        },
+        {
+          "mark": { "type": "line", "color": "#101826", "size": 3 },
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "scale": { "domain": { "param": "brush" } }
+            },
+            "y": { "field": "rolling_mean", "type": "quantitative" },
+            "stroke": {
+              "field": "placeholder-2",
+              "scale": { "range": ["#101826"] },
+              "legend": {
+                "orient": "none",
+                "legendX": 850,
+                "legendY": 50,
+                "title": "",
+                "labelExpr": "'30 Days Rolling Average'"
+              }
+            },
+            "tooltip": [
+              {
+                "field": "rolling_mean",
+                "type": "quantitative",
+                "title": "30 Days Rolling Average"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [{ "filter": { "param": "hover", "empty": false } }],
+          "mark": "point",
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "scale": { "domain": { "param": "brush" } }
+            },
+            "y": { "field": "rolling_mean", "type": "quantitative" }
+          }
+        },
+        {
+          "mark": "rule",
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "scale": { "domain": { "param": "brush" } }
+            },
+            "opacity": {
+              "condition": { "value": 1, "param": "hover", "empty": false },
+              "value": 0
+            },
+            "tooltip": [
+              { "field": "AAPL", "type": "quantitative" },
+              { "field": "AMZN", "type": "quantitative" },
+              { "field": "GOOG", "type": "quantitative" },
+              { "field": "IBM", "type": "quantitative" },
+              { "field": "MSFT", "type": "quantitative" }
+            ]
+          },
+          "params": [
+            {
+              "name": "hover",
+              "select": {
+                "type": "point",
+                "fields": ["date"],
+                "nearest": true,
+                "on": "mouseover",
+                "clear": "mouseout"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1000,
+      "height": 100,
+      "layer": [
+        {
+          "mark": { "type": "bar", "size": 2, "color": "#bfd8ff" },
+          "params": [
+            {
+              "name": "brush",
+              "select": { "type": "interval", "encodings": ["x"] }
+            }
+          ],
+          "encoding": {
+            "x": {
+              "field": "date",
+              "type": "temporal",
+              "axis": { "grid": false, "title": "Date" }
+            },
+            "y": {
+              "field": "cases_new",
+              "type": "quantitative",
+              "axis": {
+                "tickCount": 3,
+                "grid": false,
+                "title": "Daily Covid-19 Cases"
+              }
+            }
+          }
+        },
+        {
+          "mark": { "type": "line", "color": "#101826", "size": 3 },
+          "encoding": {
+            "x": { "field": "date", "type": "temporal" },
+            "y": { "field": "rolling_mean", "type": "quantitative" }
+          }
+        }
+      ]
+    }
+  ]
+}

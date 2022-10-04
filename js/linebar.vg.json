@@ -64,7 +64,12 @@
           }
         },
         {
-          "mark": "rule",
+          "mark": {
+            "type": "rule",
+            "size": 2,
+            "color": "#5d636d",
+            "strokeDash": [10, 10]
+          },
           "encoding": {
             "y": {},
             "opacity": {

@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/vaccination/vax_malaysia_pivot_compress.csv"
+  },
+  "transform": [
+    { "calculate": "timeParse(datum['date'], '%d/%m/%Y')", "as": "date" },
+    { "timeUnit": "yearmonth", "field": "date", "as": "date2" },
+    { "filter": { "timeUnit": "year", "field": "date", "gte": 2021 } },
+    {
+      "joinaggregate": [
+        { "op": "sum", "field": "vaccine_count", "as": "total_month" }
+      ],
+      "groupby": ["date2"]
+    },
+    {
+      "joinaggregate": [
+        { "op": "sum", "field": "vaccine_count", "as": "total_vax_month" }
+      ],
+      "groupby": ["date2", "vaccine_type"]
+    },
+    {
+      "calculate": "datum.total_vax_month / datum.total_month",
+      "as": "fraction"
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 800,
+      "height": 400,
+      "encoding": {
+        "x": {
+          "type": "temporal",
+          "field": "date2",
+          "axis": { "format": "%b %Y", "title": "Period" }
+        },
+        "y": {
+          "type": "quantitative",
+          "aggregate": "sum",
+          "field": "vaccine_count",
+          "stack": "normalize",
+          "axis": { "title": "Percentage" }
+        }
+      },
+      "layer": [
+        {
+          "mark": { "type": "area", "tooltip": true },
+          "encoding": {
+            "color": {
+              "field": "vaccine_type",
+              "scale": {
+                "scheme": "category20b",
+                "domain": [
+                  "sinopharm",
+                  "cansino",
+                  "astra",
+                  "sinovac",
+                  "pfizer"
+                ],
+                "range": ["#f1eef6", "#bdc9e1", "#74a9cf", "#2b8cbe", "#045a8d"]
+              },
+              "legend": { "orient": "bottom", "title": "Vaccine Type" }
+            },
+            "order": {}
+          }
+        },
+        {
+          "mark": {
+            "type": "rule",
+            "size": 2,
+            "color": "#000000",
+            "strokeDash": [10, 10]
+          },
+          "encoding": {
+            "x": { "type": "temporal", "field": "date2" },
+            "y": {},
+            "opacity": {
+              "condition": { "value": 1, "param": "hover", "empty": false },
+              "value": 0
+            },
+            "tooltip": [
+              { "field": "date2", "type": "temporal", "title": "Date" },
+              {
+                "field": "fraction",
+                "type": "quantitative",
+                "title": "pfizer",
+                "format": ".1f"
+              }
+            ]
+          },
+          "params": [
+            {
+              "name": "hover",
+              "select": {
+                "type": "point",
+                "fields": ["date2"],
+                "nearest": true,
+                "on": "mouseover",
+                "clear": "mouseout"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

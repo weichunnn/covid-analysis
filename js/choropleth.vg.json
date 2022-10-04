@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Economical Stress Level in Malaysia for 2022",
+  "width": 800,
+  "height": 400,
+  "projection": { "type": "equalEarth" },
+  "data": {
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/js/ne_10m_admin_1_states_provinces.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "ne_10m_admin_1_states_provinces"
+    }
+  },
+  "layer": [
+    {
+      "transform": [
+        {
+          "calculate": "'Data is not available in ' + datum.properties.name",
+          "as": "note"
+        }
+      ],
+      "mark": { "type": "geoshape", "fill": "lightgray", "stroke": "white" },
+      "encoding": { "tooltip": { "field": "note" } }
+    },
+    {
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/epidemic/economy_stress.csv"
+            },
+            "key": "state",
+            "fields": ["economical_stress_level"]
+          }
+        }
+      ],
+      "mark": { "type": "geoshape", "stroke": "black" },
+      "encoding": {
+        "color": {
+          "field": "economical_stress_level",
+          "type": "ordinal",
+          "scale": {
+            "type": "ordinal",
+            "domain": ["Very High", "High", "Medium", "Low", "Very Low"],
+            "range": ["#bd0026", "#f03b20", "#fd8d3c", "#f2b818", "#ede923"]
+          },
+          "legend": {
+            "title": "Economy Stress Level Indicator",
+            "titleLimit": 225,
+            "orient": "bottom"
+          }
+        },
+        "tooltip": [
+          { "field": "properties.name", "type": "nominal", "title": "State" },
+          {
+            "field": "economical_stress_level",
+            "type": "ordinal",
+            "title": "Stress Level"
+          }
+        ]
+      }
+    }
+  ]
+}

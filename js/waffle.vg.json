@@ -22,6 +22,7 @@
     },
     "color": {
       "field": "Vaccine_Type",
+      "title": "Vaccine Type",
       "scale": {
         "type": "ordinal",
         "domain": ["Pfizer", "Sinovac", "Astra", "Cansino"],
@@ -30,7 +31,7 @@
       "legend": {
         "orient": "bottom",
         "direction": "horizontal",
-        "offset": 60
+        "offset": 64
       }
     },
     "tooltip": [{ "field": "Vaccine_Type" }]

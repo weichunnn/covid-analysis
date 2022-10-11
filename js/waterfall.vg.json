@@ -120,5 +120,8 @@
       }
     }
   ],
-  "config": { "text": { "fontWeight": "bold", "color": "#404040" } }
+  "config": {
+    "text": { "fontWeight": "bold" },
+    "font": "Nunito"
+  }
 }

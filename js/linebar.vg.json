@@ -3,6 +3,7 @@
   "data": {
     "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/epidemic/cases_malaysia.csv"
   },
+  "config": { "font": "Nunito" },
   "transform": [
     { "calculate": "timeParse(datum['date'], '%Y-%m-%d')", "as": "date" },
     { "filter": { "timeUnit": "year", "field": "date", "equal": 2022 } },
@@ -40,8 +41,11 @@
                 "title": "Legend",
                 "labelExpr": "'Daily Cases'",
                 "orient": "none",
-                "legendX": 725,
-                "legendY": 20
+                "legendX": 710,
+                "legendY": 15,
+                "labelFontSize": 12,
+                "titleFontSize": 13,
+                "symbolSize": 135
               }
             }
           }
@@ -55,10 +59,13 @@
               "scale": { "range": ["#101826"] },
               "legend": {
                 "orient": "none",
-                "legendX": 725,
+                "legendX": 710,
                 "legendY": 55,
                 "title": "",
-                "labelExpr": "'30 Days Rolling Average'"
+                "labelExpr": "'30 Days Rolling Average'",
+                "labelFontSize": 12,
+                "titleFontSize": 13,
+                "symbolSize": 135
               }
             }
           }

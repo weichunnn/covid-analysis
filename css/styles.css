@@ -27,6 +27,10 @@ h3 {
   margin-top: 0px;
 }
 
+h3 {
+  margin-bottom: 10px;
+}
+
 .important {
   font-size: 18px;
   font-weight: bold;
@@ -96,7 +100,11 @@ h2 {
 }
 
 .lightblue {
-  color: #81a0bd;
+  color: #5e91bf;
+}
+
+.lightblue2 {
+  color: #9dc3de;
 }
 
 .brown {

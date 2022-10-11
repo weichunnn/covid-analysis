@@ -1,5 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": { "font": "Nunito" },
   "data": {
     "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/vaccination/vax_malaysia_pivot_compress.csv"
   },
@@ -65,9 +66,16 @@
               "scale": {
                 "scheme": "category20b",
                 "domain": ["Pfizer", "Sinovac", "Astra", "Cansino"],
-                "range": ["#045a8d", "#4C78A0", "#74a9cf", "#bdc9e1"]
+                "range": ["#045a8d", "#4C78A0", "#bdc9e1", "#f1eef6"]
               },
-              "legend": { "orient": "bottom", "title": "Vaccine Type" }
+              "legend": {
+                "orient": "bottom",
+                "title": "Vaccine Type",
+                "symbolType": "square",
+                "labelFontSize": 12,
+                "titleFontSize": 13,
+                "symbolSize": 135
+              }
             },
             "fillOpacity": {
               "condition": { "param": "highlight", "value": 1 },
@@ -92,11 +100,7 @@
               {
                 "x": "2021-07-01",
                 "y": 1,
-                "labels": [
-                  "Health Minister declared",
-                  "Pfizer as main vaccine",
-                  "while Sinovac depletes"
-                ]
+                "labels": ["Government declared", "Pfizer as main vaccine", " "]
               },
               {
                 "x": "2022-01-01",

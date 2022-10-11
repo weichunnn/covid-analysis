@@ -1,6 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "height": 400,
+  "config": { "font": "Nunito" },
   "width": "container",
   "data": {
     "values": [
@@ -115,7 +116,12 @@
             "range": ["#e6959c", "#911a24", "#FF0000"]
           },
           "title": "Vaccination Status",
-          "legend": { "orient": "top-right" }
+          "legend": {
+            "orient": "top-right",
+            "labelFontSize": 12,
+            "titleFontSize": 13,
+            "symbolSize": 135
+          }
         },
         "tooltip": [
           { "field": "type", "title": "Type" },

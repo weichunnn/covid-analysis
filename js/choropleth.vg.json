@@ -1,14 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Economical Stress Level in Malaysia for 2022",
-  "width": 800,
+  "description": "Economical Stress Level in Malaysia for 2022",
+  "width": "container",
   "height": 400,
   "projection": { "type": "equalEarth" },
   "data": {
-    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/js/ne_10m_admin_1_states_provinces.topojson",
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/js/malaysia-states.topojson",
     "format": {
       "type": "topojson",
-      "feature": "ne_10m_admin_1_states_provinces"
+      "feature": "my-states"
     }
   },
   "layer": [
@@ -25,7 +25,7 @@
     {
       "transform": [
         {
-          "lookup": "properties.name",
+          "lookup": "id",
           "from": {
             "data": {
               "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/epidemic/economy_stress.csv"
@@ -51,15 +51,27 @@
             "orient": "bottom"
           }
         },
+        "opacity": {
+          "condition": { "param": "state_highlight", "value": 1 },
+          "value": 0.2
+        },
         "tooltip": [
-          { "field": "properties.name", "type": "nominal", "title": "State" },
+          { "field": "id", "type": "nominal", "title": "State" },
           {
             "field": "economical_stress_level",
             "type": "ordinal",
             "title": "Stress Level"
           }
         ]
-      }
+      },
+      "params": [
+        {
+          "name": "state_highlight",
+          "select": { "type": "point", "fields": ["economical_stress_level"] },
+          "bind": "legend"
+        }
+      ]
     }
-  ]
+  ],
+  "config": { "view": { "stroke": null } }
 }

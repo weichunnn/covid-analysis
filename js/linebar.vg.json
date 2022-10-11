@@ -13,7 +13,7 @@
   ],
   "vconcat": [
     {
-      "width": 1000,
+      "width": 880,
       "height": 400,
       "encoding": {
         "x": {
@@ -40,8 +40,8 @@
                 "title": "Legend",
                 "labelExpr": "'Daily Cases'",
                 "orient": "none",
-                "legendX": 850,
-                "legendY": 15
+                "legendX": 725,
+                "legendY": 20
               }
             }
           }
@@ -55,13 +55,53 @@
               "scale": { "range": ["#101826"] },
               "legend": {
                 "orient": "none",
-                "legendX": 850,
-                "legendY": 50,
+                "legendX": 725,
+                "legendY": 55,
                 "title": "",
                 "labelExpr": "'30 Days Rolling Average'"
               }
             }
           }
+        },
+        {
+          "data": {
+            "values": [
+              { "x": "2022-04-01", "y": 25000, "labels": "Endemic declared" },
+              {
+                "x": "2022-02-16",
+                "y": 35000,
+                "labels": "Omicron varient hits"
+              },
+              {
+                "x": "2022-08-01",
+                "y": 7500,
+                "labels": "Travel restrictions relaxed"
+              }
+            ]
+          },
+          "layer": [
+            {
+              "encoding": {
+                "x": { "type": "temporal", "field": "x" },
+                "y": {}
+              },
+              "mark": { "type": "rule", "size": 2, "color": "gray" }
+            },
+            {
+              "encoding": {
+                "x": { "type": "temporal", "field": "x" },
+                "y": { "type": "quantitative", "field": "y" },
+                "text": { "type": "nominal", "field": "labels" }
+              },
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 10,
+                "baseline": "bottom",
+                "fontSize": 14
+              }
+            }
+          ]
         },
         {
           "mark": {
@@ -119,7 +159,7 @@
       ]
     },
     {
-      "width": 1000,
+      "width": 880,
       "height": 100,
       "layer": [
         {

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 365,
+  "height": 365,
+  "data": {
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/vaccination/vaccine_distribution_waffled.csv"
+  },
+  "transform": [{ "calculate": "datum.Percent / 100", "as": "format_percent" }],
+  "mark": { "type": "square", "size": 1350 },
+  "encoding": {
+    "x": {
+      "field": "Column",
+      "type": "quantitative",
+      "axis": null,
+      "scale": { "domain": [1, 10] }
+    },
+    "y": {
+      "field": "Row",
+      "type": "quantitative",
+      "axis": null,
+      "scale": { "domain": [1, 10] }
+    },
+    "color": {
+      "field": "Vaccine_Type",
+      "scale": {
+        "type": "ordinal",
+        "domain": ["Pfizer", "Sinovac", "Astra", "Cansino"],
+        "range": ["#045a8d", "#4C78A0", "#74a9cf", "#bdc9e1"]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "offset": 60
+      }
+    },
+    "tooltip": [{ "field": "Vaccine_Type" }]
+  },
+  "config": { "view": { "stroke": "transparent" } }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Overall CFR Rate",
+  "data": {
+    "values": [
+      { "category": "Boosted", "value": 0.096197, "order": 1 },
+      { "category": "Fully Vaccinated", "value": 0.37844, "order": 2 },
+      { "category": "Unvaccinated", "value": 2.068436, "order": 3 }
+    ]
+  },
+  "mark": { "type": "arc", "outerRadius": 80 },
+  "encoding": {
+    "theta": {
+      "field": "value",
+      "type": "quantitative",
+      "scale": { "range": [2.45619449, 8.739379797] },
+      "stack": true
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Category",
+      "scale": {
+        "domain": ["Unvaccinated", "Boosted", "Fully Vaccinated"],
+        "range": ["#416D9D", "#674028", "#DEAC58"]
+      },
+      "legend": { "orient": "right" }
+    },
+    "order": { "field": "order" }
+  }
+}

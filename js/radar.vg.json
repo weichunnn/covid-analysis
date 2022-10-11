@@ -1,0 +1,166 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A radar chart example, showing multiple dimensions in a radial layout.",
+  "width": 500,
+  "height": 500,
+  "padding": 40,
+  "autosize": { "type": "none", "contains": "padding" },
+  "signals": [{ "name": "radius", "update": "width / 2" }],
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        { "key": "18 to 29", "value": 0.15, "category": "Unvaccinated" },
+        { "key": "30 to 39", "value": 0.26, "category": "Unvaccinated" },
+        { "key": "40 to 49", "value": 0.99, "category": "Unvaccinated" },
+        { "key": "50 to 59", "value": 1.91, "category": "Unvaccinated" },
+        { "key": "60 to 69", "value": 3.95, "category": "Unvaccinated" },
+        { "key": "70 to 79", "value": 8.72, "category": "Unvaccinated" },
+        { "key": "80+", "value": 9.28, "category": "Unvaccinated" },
+        { "key": "18 to 29", "value": 0.01, "category": "Fully Vaccinated" },
+        { "key": "30 to 39", "value": 0.05, "category": "Fully Vaccinated" },
+        { "key": "40 to 49", "value": 0.22, "category": "Fully Vaccinated" },
+        { "key": "50 to 59", "value": 0.59, "category": "Fully Vaccinated" },
+        { "key": "60 to 69", "value": 1.45, "category": "Fully Vaccinated" },
+        { "key": "70 to 79", "value": 3.49, "category": "Fully Vaccinated" },
+        { "key": "80+", "value": 8.65, "category": "Fully Vaccinated" }
+      ]
+    },
+    {
+      "name": "keys",
+      "source": "table",
+      "transform": [{ "type": "aggregate", "groupby": ["key"] }]
+    }
+  ],
+  "scales": [
+    {
+      "name": "angular",
+      "type": "point",
+      "range": { "signal": "[-PI, PI]" },
+      "padding": 0.5,
+      "domain": { "data": "table", "field": "key" }
+    },
+    {
+      "name": "radial",
+      "type": "linear",
+      "range": { "signal": "[0, radius]" },
+      "zero": true,
+      "nice": false,
+      "domain": { "data": "table", "field": "value" },
+      "domainMin": 0
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": { "data": "table", "field": "category" },
+      "range": { "scheme": "category10" }
+    }
+  ],
+  "encode": {
+    "enter": { "x": { "signal": "radius" }, "y": { "signal": "radius" } }
+  },
+  "marks": [
+    {
+      "type": "group",
+      "name": "categories",
+      "zindex": 1,
+      "from": {
+        "facet": { "data": "table", "name": "facet", "groupby": ["category"] }
+      },
+      "marks": [
+        {
+          "type": "line",
+          "name": "category-line",
+          "from": { "data": "facet" },
+          "encode": {
+            "enter": {
+              "interpolate": { "value": "linear-closed" },
+              "x": {
+                "signal": "scale('radial', datum.value) * cos(scale('angular', datum.key))"
+              },
+              "y": {
+                "signal": "scale('radial', datum.value) * sin(scale('angular', datum.key))"
+              },
+              "stroke": { "scale": "color", "field": "category" },
+              "strokeWidth": { "value": 1 },
+              "fill": { "scale": "color", "field": "category" },
+              "fillOpacity": { "value": 0.1 }
+            }
+          }
+        },
+        {
+          "type": "text",
+          "name": "value-text",
+          "from": { "data": "category-line" },
+          "encode": {
+            "enter": {
+              "x": { "signal": "datum.x" },
+              "y": { "signal": "datum.y" },
+              "text": { "signal": "datum.datum.value" },
+              "align": { "value": "center" },
+              "baseline": { "value": "middle" },
+              "fill": { "value": "black" }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "rule",
+      "name": "radial-grid",
+      "from": { "data": "keys" },
+      "zindex": 0,
+      "encode": {
+        "enter": {
+          "x": { "value": 0 },
+          "y": { "value": 0 },
+          "x2": { "signal": "radius * cos(scale('angular', datum.key))" },
+          "y2": { "signal": "radius * sin(scale('angular', datum.key))" },
+          "stroke": { "value": "lightgray" },
+          "strokeWidth": { "value": 1 }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "key-label",
+      "from": { "data": "keys" },
+      "zindex": 1,
+      "encode": {
+        "enter": {
+          "x": { "signal": "(radius + 5) * cos(scale('angular', datum.key))" },
+          "y": { "signal": "(radius + 5) * sin(scale('angular', datum.key))" },
+          "text": { "field": "key" },
+          "align": [
+            {
+              "test": "abs(scale('angular', datum.key)) > PI / 2",
+              "value": "right"
+            },
+            { "value": "left" }
+          ],
+          "baseline": [
+            { "test": "scale('angular', datum.key) > 0", "value": "top" },
+            { "test": "scale('angular', datum.key) == 0", "value": "middle" },
+            { "value": "bottom" }
+          ],
+          "fill": { "value": "black" },
+          "fontWeight": { "value": "bold" }
+        }
+      }
+    },
+    {
+      "type": "line",
+      "name": "outer-line",
+      "from": { "data": "radial-grid" },
+      "encode": {
+        "enter": {
+          "interpolate": { "value": "linear-closed" },
+          "x": { "field": "x2" },
+          "y": { "field": "y2" },
+          "stroke": { "value": "lightgray" },
+          "strokeWidth": { "value": 1 }
+        }
+      }
+    }
+  ]
+}

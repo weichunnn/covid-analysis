@@ -1,0 +1,124 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "number of death over the months in 2022",
+  "data": {
+    "values": [
+      { "label": "Jan", "count": 434 },
+      { "label": "Feb", "count": 572 },
+      { "label": "Mar", "count": 1104 },
+      { "label": "Apr", "count": -1663 },
+      { "label": "May", "count": -328 },
+      { "label": "Jun", "count": -20 },
+      { "label": "Jul", "count": 136 },
+      { "label": "Aug", "count": 10 },
+      { "label": "Sep", "count": -122 }
+    ]
+  },
+  "width": "container",
+  "height": 400,
+  "transform": [
+    { "window": [{ "op": "sum", "field": "count", "as": "sum" }] },
+    { "window": [{ "op": "lead", "field": "label", "as": "lead" }] },
+    {
+      "calculate": "datum.lead === null ? datum.label : datum.lead",
+      "as": "lead"
+    },
+    {
+      "calculate": "datum.label === 'End' ? 0 : datum.sum - datum.count",
+      "as": "previous_sum"
+    },
+    {
+      "calculate": "datum.label === 'End' ? datum.sum : datum.count",
+      "as": "count"
+    },
+    {
+      "calculate": "(datum.label !== 'Begin' && datum.label !== 'End' && datum.count > 0 ? '+' : '') + datum.count",
+      "as": "text_count"
+    },
+    { "calculate": "(datum.sum + datum.previous_sum) / 2", "as": "center" },
+    {
+      "calculate": "datum.sum < datum.previous_sum ? datum.sum : ''",
+      "as": "sum_dec"
+    },
+    {
+      "calculate": "datum.sum > datum.previous_sum ? datum.sum : ''",
+      "as": "sum_inc"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "label",
+      "type": "ordinal",
+      "sort": null,
+      "axis": { "labelAngle": 0, "title": "Months" }
+    }
+  },
+  "layer": [
+    {
+      "mark": { "type": "bar", "size": 45 },
+      "encoding": {
+        "y": {
+          "field": "previous_sum",
+          "type": "quantitative",
+          "title": "Death Reported"
+        },
+        "y2": { "field": "sum" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Begin' || datum.label === 'End'",
+              "value": "#f7e0b6"
+            },
+            { "test": "datum.sum < datum.previous_sum", "value": "#10B880" }
+          ],
+          "value": "#E8313C"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#404040",
+        "opacity": 1,
+        "strokeWidth": 2,
+        "xOffset": -22.5,
+        "x2Offset": 22.5
+      },
+      "encoding": {
+        "x2": { "field": "lead" },
+        "y": { "field": "sum", "type": "quantitative" }
+      }
+    },
+    {
+      "mark": { "type": "text", "dy": -4, "baseline": "bottom" },
+      "encoding": {
+        "y": { "field": "sum_inc", "type": "quantitative" },
+        "text": { "field": "sum_inc", "type": "nominal" }
+      }
+    },
+    {
+      "mark": { "type": "text", "dy": 4, "baseline": "top" },
+      "encoding": {
+        "y": { "field": "sum_dec", "type": "quantitative" },
+        "text": { "field": "sum_dec", "type": "nominal" }
+      }
+    },
+    {
+      "mark": { "type": "text", "fontWeight": "bold", "baseline": "middle" },
+      "encoding": {
+        "y": { "field": "center", "type": "quantitative" },
+        "text": { "field": "text_count", "type": "nominal" },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.label === 'Begin' || datum.label === 'End'",
+              "value": "#725a30"
+            }
+          ],
+          "value": "white"
+        }
+      }
+    }
+  ],
+  "config": { "text": { "fontWeight": "bold", "color": "#404040" } }
+}

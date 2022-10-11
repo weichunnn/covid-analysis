@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Deaths by Age Group and Sex",
+  "data": {
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/notebooks/death_sex_age.csv"
+  },
+  "transform": [
+    { "calculate": "datum.sex == 0 ? 'Female' : 'Male'", "as": "gender" }
+  ],
+  "spacing": 5,
+  "hconcat": [
+    {
+      "height": 400,
+      "width": 250,
+      "transform": [{ "filter": { "field": "gender", "equal": "Female" } }],
+      "title": "Female",
+      "mark": { "type": "bar", "tooltip": true },
+      "encoding": {
+        "y": {
+          "field": "age_group",
+          "title": "Age Group",
+          "axis": null,
+          "sort": "descending"
+        },
+        "x": {
+          "aggregate": "sum",
+          "field": "counts",
+          "title": "Population",
+          "sort": "descending"
+        },
+        "color": {
+          "field": "gender",
+          "title": "Gender",
+          "scale": { "range": ["#675193", "#ca8861"] },
+          "legend": null
+        }
+      }
+    },
+    {
+      "width": 20,
+      "height": 400,
+      "view": { "stroke": null },
+      "mark": { "type": "text", "align": "center" },
+      "encoding": {
+        "y": {
+          "field": "age_group",
+          "type": "ordinal",
+          "axis": null,
+          "sort": "descending"
+        },
+        "text": { "field": "age_group", "type": "ordinal" }
+      }
+    },
+    {
+      "height": 400,
+      "width": 250,
+      "transform": [{ "filter": { "field": "gender", "equal": "Male" } }],
+      "title": "Male",
+      "mark": { "type": "bar", "tooltip": true },
+      "encoding": {
+        "y": {
+          "field": "age_group",
+          "title": "Age Group",
+          "axis": null,
+          "sort": "descending"
+        },
+        "x": {
+          "aggregate": "sum",
+          "field": "counts",
+          "title": "Population"
+        },
+        "color": { "field": "gender", "legend": null, "title": "Gender" }
+      }
+    }
+  ],
+  "config": { "view": { "stroke": null }, "axis": { "grid": false } }
+}

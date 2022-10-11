@@ -1,0 +1,129 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "height": 400,
+  "width": "container",
+  "data": {
+    "values": [
+      {
+        "age": "18 to 29",
+        "type": "Unvaccinated",
+        "value": 0.14527342533983606
+      },
+      { "age": "18 to 29", "type": "Boosted", "value": 0.0041037566472308185 },
+      {
+        "age": "18 to 29",
+        "type": "Fully Vaccinated",
+        "value": 0.012583747005936058
+      },
+      { "age": "30 to 39", "type": "Unvaccinated", "value": 0.26499894000424 },
+      { "age": "30 to 39", "type": "Boosted", "value": 0.011230583123963177 },
+      {
+        "age": "30 to 39",
+        "type": "Fully Vaccinated",
+        "value": 0.04777368186601419
+      },
+      {
+        "age": "40 to 49",
+        "type": "Unvaccinated",
+        "value": 0.9870276367738298
+      },
+      { "age": "40 to 49", "type": "Boosted", "value": 0.03264248199791478 },
+      {
+        "age": "40 to 49",
+        "type": "Fully Vaccinated",
+        "value": 0.41594661242459284
+      },
+      {
+        "age": "50 to 59",
+        "type": "Unvaccinated",
+        "value": 1.9112926758097462
+      },
+      { "age": "50 to 59", "type": "Boosted", "value": 0.10048415090892482 },
+      {
+        "age": "50 to 59",
+        "type": "Fully Vaccinated",
+        "value": 0.5853851044704128
+      },
+      { "age": "60 to 69", "type": "Unvaccinated", "value": 3.954289860330129 },
+      { "age": "60 to 69", "type": "Boosted", "value": 0.2682996509620281 },
+      {
+        "age": "60 to 69",
+        "type": "Fully Vaccinated",
+        "value": 1.4495098197819265
+      },
+      { "age": "70 to 79", "type": "Unvaccinated", "value": 8.720777515103755 },
+      { "age": "70 to 79", "type": "Boosted", "value": 0.783350195114901 },
+      {
+        "age": "70 to 79",
+        "type": "Fully Vaccinated",
+        "value": 3.4881528502294015
+      },
+      { "age": "80+", "type": "Unvaccinated", "value": 9.283779717123082 },
+      { "age": "80+", "type": "Boosted", "value": 2.719762368885176 },
+      { "age": "80+", "type": "Fully Vaccinated", "value": 8.648081534772183 },
+      { "age": "Overall", "type": "Unvaccinated", "value": 2.0684357541899443 },
+      { "age": "Overall", "type": "Boosted", "value": 0.09619739029418962 },
+      {
+        "age": "Overall",
+        "type": "Fully Vaccinated",
+        "value": 0.3784398927783601
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Case Fatality Rate",
+      "axis": {
+        "offset": 10,
+        "ticks": false,
+        "minExtent": 20,
+        "domain": false,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "age",
+      "type": "nominal",
+      "title": "Age Category",
+      "axis": {
+        "offset": 20,
+        "ticks": false,
+        "minExtent": 50,
+        "domain": false,
+        "grid": true
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "detail": { "field": "age", "type": "nominal" },
+        "color": { "value": "#db646f" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 350, "tooltip": true },
+      "encoding": {
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Boosted", "Fully Vaccinated", "Unvaccinated"],
+            "range": ["#e6959c", "#911a24", "#FF0000"]
+          },
+          "title": "Vaccination Status",
+          "legend": { "orient": "top-right" }
+        },
+        "tooltip": [
+          { "field": "type", "title": "Type" },
+          { "field": "value", "title": "CFR rate", "format": ".2f" },
+          { "field": "age", "title": "Age Category" }
+        ],
+        "opacity": { "value": 1 }
+      }
+    }
+  ]
+}

@@ -8,6 +8,12 @@
     { "timeUnit": "yearmonth", "field": "date", "as": "date2" },
     { "filter": { "timeUnit": "year", "field": "date", "gte": 2021 } },
     {
+      "filter": {
+        "field": "vaccine_type",
+        "oneOf": ["Pfizer", "Sinovac", "Astra", "Cansino"]
+      }
+    },
+    {
       "joinaggregate": [
         { "op": "sum", "field": "vaccine_count", "as": "total_month" }
       ],
@@ -26,14 +32,19 @@
   ],
   "layer": [
     {
-      "width": 800,
+      "width": 480,
       "height": 400,
       "encoding": {
         "x": {
           "type": "temporal",
           "field": "date2",
           "title": "Period",
-          "axis": { "format": "%b %Y", "title": "Period" }
+          "axis": {
+            "format": "%b %Y",
+            "title": "Period",
+            "grid": false,
+            "tickCount": { "interval": "month", "step": 2 }
+          }
         },
         "y": {
           "type": "quantitative",
@@ -41,37 +52,92 @@
           "field": "vaccine_count",
           "stack": "normalize",
           "title": "Percentage Count",
-          "axis": { "title": "Percentage" }
+          "axis": { "title": "Percentage", "grid": false, "format": ".0%" }
         }
       },
       "layer": [
         {
           "mark": { "type": "area", "tooltip": true },
-          "transform": [
-            {
-              "calculate": "datum.sum_vaccine_count_end - datum.sum_vaccine_count",
-              "as": "percent"
-            }
-          ],
           "encoding": {
-            "color": {
+            "fill": {
               "field": "vaccine_type",
               "title": "Vaccine Type",
               "scale": {
                 "scheme": "category20b",
-                "domain": [
-                  "pfizer",
-                  "sinovac",
-                  "astra",
-                  "cansino",
-                  "sinopharm"
-                ],
-                "range": ["#045a8d", "#2b8cbe", "#74a9cf", "#bdc9e1", "#f1eef6"]
+                "domain": ["Pfizer", "Sinovac", "Astra", "Cansino"],
+                "range": ["#045a8d", "#4C78A0", "#74a9cf", "#bdc9e1"]
               },
               "legend": { "orient": "bottom", "title": "Vaccine Type" }
             },
+            "fillOpacity": {
+              "condition": { "param": "highlight", "value": 1 },
+              "value": 0.2
+            },
             "order": {}
-          }
+          },
+          "params": [
+            {
+              "name": "highlight",
+              "select": {
+                "type": "point",
+                "on": "mouseover",
+                "clear": "mouseout"
+              }
+            }
+          ]
+        },
+        {
+          "data": {
+            "values": [
+              {
+                "x": "2021-07-01",
+                "y": 1,
+                "labels": [
+                  "Health Minister declared",
+                  "Pfizer as main vaccine",
+                  "while Sinovac depletes"
+                ]
+              },
+              {
+                "x": "2022-01-01",
+                "y": 0.5,
+                "labels": [
+                  "First batch of Astra",
+                  "receipients after",
+                  "6 months wait"
+                ]
+              }
+            ]
+          },
+          "layer": [
+            {
+              "encoding": {
+                "x": { "type": "temporal", "field": "x" },
+                "y": {}
+              },
+              "mark": {
+                "type": "rule",
+                "size": 2,
+                "color": "black",
+                "strokeDash": [10, 10]
+              }
+            },
+            {
+              "encoding": {
+                "x": { "type": "temporal", "field": "x" },
+                "y": { "type": "quantitative", "field": "y" },
+                "text": { "type": "nominal", "field": "labels" }
+              },
+              "mark": {
+                "type": "text",
+                "align": "center",
+                "dy": -40,
+                "dx": 0,
+                "baseline": "bottom",
+                "fontSize": 14
+              }
+            }
+          ]
         }
       ]
     }

@@ -10,11 +10,173 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
   </head>
   <body>
-    <div id="choropleth_map"></div>
+    <div class="content">
+      <h1 class="title">COVID-19 in Malaysia</h1>
+      <div class="section description">
+        <h2>A Brief Overview</h2>
+        <p>
+          The <span class="important">Covid-19</span> pandemic struck Malaysia
+          in the middle of 2020 and had caused significant impact to the live of
+          people and the economy. Now, approaching the endemic phase, it is also
+          important to analyze the progress and performance of the country to
+          defeat <span class="important">Covid-19</span>. This visualization
+          aims to show the trend and distribution of crucial data points from
+          multiple perspectives for the year 2022, from January to September.
+        </p>
+      </div>
+      <div class="wrapper">
+        <div class="section">
+          <h2>Daily Covid-19 Cases Reported</h2>
+          <div class="vega-viz" id="linebar"></div>
+          <p>
+            Without a doubt, Malaysia had been going in the right direction as
+            can be seen with the
+            <span class="important">downward slope</span> in number of cases
+            reported post endemic phase. From the 30 days moving average, there
+            are notably 2 peaks during the year, one in March and another in
+            July respectively. The increase in cases during March, with a peak
+            of <span class="important">33,406 cases on March 5th</span>, was due
+            to the viral Omicron variant circulating in the country. On the
+            other hand, the slight increase in cases during July,
+            <span class="important">5685 cases on July 20th</span>, was due to
+            the increased travel activity.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Number of Death Reported by Months</h2>
+          <div class="vega-viz" id="waterfall"></div>
+          <p>
+            From the waterfall chart, we can see that the number of death has a
+            strong correlation with the number of cases above. The number of
+            death
+            <span class="important red"
+              >reached its peak during March with 2110 deaths reported</span
+            >
+            then decreased drastically after the Omicron variant subsides.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Economical Stress Level due to Covid</h2>
+          <span>Click on the legend to filter for certain stress level.</span>
+          <div class="vega-viz" id="choropleth"></div>
+          <p>
+            Many industry and economy worldwide were affected by Covid and are
+            struggling to recover from the pandemic. The map above tells us that
+            states such as
+            <span class="important red">Kedah, Kelantan and Perak</span> are
+            affected the highest due to the states being
+            <span class="important red"
+              >highly dependent on labour services in tourism and agriculture
+              services</span
+            >.
+            <span class="important yellow">Kuala Lumpur and Putrajaya</span>
+            recovered the fastest due to the states being the
+            <span class="important yellow"
+              >central economic hub in the country</span
+            >.
+          </p>
+        </div>
+        <div class="section">
+          <h2>Distribution of Vaccines Preference</h2>
+          <div class="h-section">
+            <div>
+              <h3>Distribution by Month</h3>
+              <div class="vega-viz" id="area" style="margin-right: 10px"></div>
+            </div>
+            <div>
+              <h3 style="margin-bottom: 30px">Distribution by All Time</h3>
+              <div class="vega-viz" id="waffle" style="margin-top: 35px"></div>
+            </div>
+          </div>
+          <p>
+            Since the release of the vaccines, Malaysian had been very
+            supportive in getting vaccinated. Among the vaccines provided,
+            <span class="important darkblue">Pfizer</span> from the US appears
+            to be the
+            <span class="important darkblue"
+              >most preffered with 62% distribution rate</span
+            >. This is then followed by
+            <span class="important lightblue">Sinovac</span> from China with a
+            <span class="important lightblue">30% distribution rate</span>.
+          </p>
+        </div>
+        <!-- <div class="section">
+          <h2>Case Fatality Rate (CFR) by Age Group & Vax Status</h2>
+          <div class="vega-viz" id="dotplot"></div>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum id
+            perferendis unde, consequatur ipsam consequuntur provident
+            dignissimos inventore eligendi, repudiandae dolore aperiam
+            recusandae! Ipsa, esse pariatur. Enim quaerat unde dolore? Lorem
+            ipsum dolor sit amet consectetur adipisicing elit. Ipsum ab non
+            voluptas iure cupiditate deserunt, iusto mollitia quasi hic,
+            recusandae neque, inventore sequi. Ipsa repellendus quo autem odit
+            earum mollitia?
+          </p>
+        </div> -->
+        <div class="section">
+          <h2>Population Death by Age Group & Gender</h2>
+          <div class="h-section">
+            <div style="width: 55%">
+              <div class="vega-viz" id="butterfly"></div>
+            </div>
+            <div style="width: 40%">
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  flex-grow: 1;
+                  height: 460px;
+                "
+              >
+                <h2 style="margin-top: 0px">Most Common Groups</h2>
+                <span
+                  >Most death from Covid-19 comes from people of old age which
+                  are above <span class="important">60 years old</span>. This
+                  could be due to older people had more health complications
+                  hence vaccines may not be suitable.
+                </span>
+                <h2>Gender</h2>
+                <span
+                  >On average,
+                  <span class="important purple"
+                    >females has lower number of death</span
+                  >
+                  in each age group. Clinical research shows females has lower
+                  risk from dying after hospitalization compared to males.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="width: 100%; text-align: right">
+        Visualization by Tan Wei Chun
+      </p>
+    </div>
   </body>
 </html>
 <script>
-  vegaEmbed("#choropleth_map", "js/choropleth.vg.json")
+  vegaEmbed("#choropleth", "js/choropleth.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#area", "js/area.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#dotplot", "js/dotplot.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#linebar", "js/linebar.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#waffle", "js/waffle.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#butterfly", "js/butterfly.vg.json", { actions: false })
+    .then(function (result) {})
+    .catch(console.error);
+  vegaEmbed("#waterfall", "js/waterfall.vg.json", { actions: false })
     .then(function (result) {})
     .catch(console.error);
 </script>

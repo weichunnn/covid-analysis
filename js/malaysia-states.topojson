@@ -472,8 +472,8 @@
         {
           "type": "MultiPolygon",
           "arcs": [[[25, -12, 26]], [[27]]],
-          "id": "Penang",
-          "properties": { "Name": "Penang" }
+          "id": "Pulau Pinang",
+          "properties": { "Name": "Pulau Pinang" }
         },
         {
           "type": "Polygon",

@@ -117,7 +117,9 @@
           },
           "title": "Vaccination Status",
           "legend": {
-            "orient": "top-right",
+            "orient": "none",
+            "legendX": 710,
+            "legendY": 10,
             "labelFontSize": 12,
             "titleFontSize": 13,
             "symbolSize": 135

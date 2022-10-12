@@ -5,13 +5,20 @@
   "height": 400,
   "projection": { "type": "equalEarth" },
   "data": {
-    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/js/malaysia-states.topojson",
+    "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/js/ne_10m_admin_1_states_provinces.topojson",
     "format": {
       "type": "topojson",
-      "feature": "my-states"
+      "feature": "ne_10m_admin_1_states_provinces"
     }
   },
-
+  "transform": [
+    {
+      "filter": {
+        "field": "properties.admin",
+        "equal": "Malaysia"
+      }
+    }
+  ],
   "layer": [
     {
       "transform": [
@@ -26,7 +33,7 @@
     {
       "transform": [
         {
-          "lookup": "id",
+          "lookup": "properties.name",
           "from": {
             "data": {
               "url": "https://raw.githubusercontent.com/weichunnn/covid-analysis/master/data/epidemic/economy_stress.csv"
@@ -64,7 +71,7 @@
           "value": 0.2
         },
         "tooltip": [
-          { "field": "id", "type": "nominal", "title": "State" },
+          { "field": "properties.name", "type": "nominal", "title": "State" },
           {
             "field": "economical_stress_level",
             "type": "ordinal",
@@ -79,7 +86,54 @@
           "bind": "legend"
         }
       ]
+    },
+    {
+      "data": {
+        "url": "./js/capital-city.csv"
+      },
+      "transform": [
+        {
+          "calculate": "(datum.city == 'George Town' || datum.city == 'Alor Setar') ? split(datum.city, ' ') : datum.city",
+          "as": "city"
+        }
+      ],
+      "encoding": {
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": { "param": "state_highlight", "value": 1 },
+          "value": 0.2
+        }
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "color": "black",
+            "size": 30
+          }
+        },
+        {
+          "encoding": {
+            "text": {
+              "field": "city",
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "type": "text",
+            "dy": { "expr": "parseInt(datum.dy)" },
+            "dx": { "expr": "parseInt(datum.dx)" }
+          }
+        }
+      ]
     }
   ],
-  "config": { "view": { "stroke": null }, "font": "Nunito" }
+  "config": { "font": "Nunito" }
 }

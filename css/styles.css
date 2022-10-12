@@ -55,7 +55,7 @@ h3 {
 .description {
   border-radius: 7px;
   margin-bottom: 20px;
-  padding: 10px 30px;
+  padding: 30px;
   width: 1020px;
 }
 
@@ -113,4 +113,16 @@ h2 {
 
 .purple {
   color: #8413bd;
+}
+
+.brightred {
+  color: #ff0000;
+}
+
+.dimred {
+  color: #911a25;
+}
+
+.lightred {
+  color: #e6959c;
 }

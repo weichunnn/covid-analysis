@@ -135,5 +135,5 @@
       ]
     }
   ],
-  "config": { "font": "Nunito" }
+  "config": { "view": { "stroke": "transparent" }, "font": "Nunito" }
 }

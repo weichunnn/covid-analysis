@@ -3,15 +3,15 @@
   "description": "number of death over the months in 2022",
   "data": {
     "values": [
-      { "label": "Jan", "count": 434 },
-      { "label": "Feb", "count": 572 },
-      { "label": "Mar", "count": 1104 },
-      { "label": "Apr", "count": -1663 },
+      { "label": "January", "count": 434 },
+      { "label": "February", "count": 572 },
+      { "label": "March", "count": 1104 },
+      { "label": "April", "count": -1663 },
       { "label": "May", "count": -328 },
-      { "label": "Jun", "count": -20 },
-      { "label": "Jul", "count": 136 },
-      { "label": "Aug", "count": 10 },
-      { "label": "Sep", "count": -122 }
+      { "label": "June", "count": -20 },
+      { "label": "July", "count": 136 },
+      { "label": "August", "count": 10 },
+      { "label": "September", "count": -122 }
     ]
   },
   "width": "container",
@@ -55,13 +55,30 @@
   },
   "layer": [
     {
-      "mark": { "type": "bar", "size": 45 },
+      "mark": { "type": "bar", "size": 45, "tooltip": true },
       "encoding": {
         "y": {
           "field": "previous_sum",
           "type": "quantitative",
           "title": "Death Reported"
         },
+        "tooltip": [
+          {
+            "field": "label",
+            "type": "ordinal",
+            "title": "Month"
+          },
+          {
+            "field": "count",
+            "type": "ordinal",
+            "title": "Absolute Change"
+          },
+          {
+            "field": "sum",
+            "type": "quantitative",
+            "title": "Death Reported"
+          }
+        ],
         "y2": { "field": "sum" },
         "color": {
           "condition": [

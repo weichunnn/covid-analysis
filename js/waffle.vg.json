@@ -26,10 +26,12 @@
       "scale": {
         "type": "ordinal",
         "domain": ["Pfizer", "Sinovac", "Astra", "Cansino"],
-        "range": ["#045a8d", "#4C78A0", "#bdc9e1", "#f1eef6"]
+        "range": ["#2C9CED", "#2A5884", "#72A3C8", "#B8DDF0"]
       },
+
       "legend": null
     },
+    "opacity": { "value": 1 },
     "tooltip": [{ "field": "Vaccine_Type", "title": "Vaccine Type" }]
   },
   "config": { "view": { "stroke": "transparent" }, "font": "Nunito" }

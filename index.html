@@ -1,80 +1,76 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
-      rel="stylesheet"
-    />
 
-    <!-- CSS file -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
-  </head>
-  <body>
-    <div class="content">
-      <h1 class="title">COVID-19 in Malaysia</h1>
-      <div class="section description">
-        <p style="margin: 0px;">
-          The <span class="important">Covid-19</span> pandemic struck Malaysia
-          in the middle of 2020 and had caused significant impact to the live of
-          people and the economy. Now, approaching the endemic phase, it is also
-          important to analyze the progress and performance of the country to
-          defeat <span class="important">Covid-19</span>. This visualization
-          aims to show the trend and distribution of crucial data points from
-          multiple perspectives for the year 2022, from January to September.
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+    rel="stylesheet" />
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+</head>
+
+<body>
+  <div class="content">
+    <span class="header">
+      <span class="title blue">COVID-19</span><span class="title"> in Malaysia</span>
+    </span>
+    <div class="section description">
+      <p style="margin: 0px;">
+        The <span class="important">Covid-19</span> pandemic struck Malaysia
+        in the middle of 2020 and had caused significant impact to the live of
+        people and the economy. This visualization aims to show the trend and
+        distribution of crucial data points from multiple perspectives in
+        <span class="important">Malaysia</span> during the <span class="important">Endemic phase in 2022</span>.
+      </p>
+    </div>
+    <div class="wrapper">
+      <div class="section">
+        <h2>Daily Covid-19 Cases Reported</h2>
+        <div class="vega-viz" id="linebar"></div>
+        <p>
+          Without a doubt, Malaysia had been going in the right direction as
+          can be seen with the
+          <span class="important">downward slope</span> in number of cases
+          reported post endemic phase. The increase in cases during March, with a peak
+          of <span class="important">33,406 cases on March 5th</span>, was due
+          to the viral Omicron variant circulating in the country. Additionally, the slight increase in cases during
+          July, <span class="important">with a peak of 5685 cases on July 20th</span>, was due to
+          the increased travel activity.
         </p>
       </div>
-      <div class="wrapper">
-        <div class="section">
-          <h2>Daily Covid-19 Cases Reported</h2>
-          <div class="vega-viz" id="linebar"></div>
-          <p>
-            Without a doubt, Malaysia had been going in the right direction as
-            can be seen with the
-            <span class="important">downward slope</span> in number of cases
-            reported post endemic phase. From the 30 days moving average, there
-            are notably 2 peaks during the year, one in March and another in
-            July respectively. The increase in cases during March, with a peak
-            of <span class="important">33,406 cases on March 5th</span>, was due
-            to the viral Omicron variant circulating in the country. On the
-            other hand, the slight increase in cases during July,
-            <span class="important">5685 cases on July 20th</span>, was due to
-            the increased travel activity.
-          </p>
-        </div>
-        <div class="section">
-          <h2>Number of Death Reported by Months</h2>
-          <div class="vega-viz" id="waterfall"></div>
-          <p>
-            From the waterfall chart, we can see that the number of death has a
-            strong correlation with the number of cases above. The number of
-            death
-            <span class="important red"
-              >reached its peak during March with 2110 deaths reported</span
-            >
-            then decreased drastically after the Omicron variant subsides.
-          </p>
-        </div>
-        <div class="section" style="position: relative;"">
+      <div class="section">
+        <h2>Number of Death Reported by Months</h2>
+        <div class="vega-viz" id="waterfall"></div>
+        <p>
+          From the waterfall chart, we can see that the number of death has a
+          strong correlation with the number of cases above. The number of
+          death
+          <span class="important red">reached its peak during March with 2110 deaths reported</span>
+          then decreased drastically after the Omicron variant subsides.
+        </p>
+      </div>
+      <div class="section" style="position: relative;"">
           <h2>Economical Stress Level due to Covid</h2>
-          <span>Many industry and economy in Malaysia were affected by <span class="important">Covid-19</span>and are
-            struggling to recover from the pandemic. Click on the legend to filter for certain stress level.</span>
-          <div style="padding:0px 10px; border-radius:10px;border:2px solid gray;width: 300px; position:absolute; top:150px; left:325px;z-index: 1;"> 
-            <p>
-              <span class="important red">Kedah, Kelantan and Perak</span> are
-              affected the highest due to being
-              <span class="important red"
-                >highly dependent on labour services in the farming industry</span>.
-            </p>
-          </div>
-          <div class="vega-viz" id="choropleth" "></div>
+          <span>Many industry and economy in Malaysia were affected by <span class=" important">Covid-19</span> and are
+        struggling to recover from the pandemic. Click on the legend to filter for certain stress level.</span>
+        <div class="textbox">
+          <p style="font-size: 14px;">
+            <span class="important red" style="font-size: 15px;">Kedah, Kelantan and Perak</span> are
+            affected the highest due to being
+            <span class="important red" style="font-size: 15px;">highly dependent on labour services in the farming
+              industry</span>.
+          </p>
         </div>
-        <div class="section">
+        <div class="vega-viz" id="choropleth" "></div>
+        </div>
+        <div class=" section">
           <h2>Distribution of Vaccines Preference</h2>
           <div class="h-section">
             <div>
@@ -83,52 +79,24 @@
             </div>
             <div style="margin-top: -80px;">
               <h3>Distribution by All Time</h3>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: space-between;
-                  align-items: center;
-                "
-              >
-                  <div
-                    class="darkblue" 
-                    style="
-                      display: flex;
-                      flex-direction: row;
-                      align-items: center;
-                    "
-                  >
-                    <span style="font-size: 30px; margin-right: 10px">■</span>
-                    <span style="font-size: 17px; margin-right: 10px"">Pfizer</span>
-                    <span style="font-size: 20px;font-weight: bold;">62%</span>
-                  </div>
-                  <div
-                  class="lightblue"
-                  style="
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                  "
-                >
-                  <span  style="font-size: 30px; margin-right: 10px">■</span>
-                  <span style="font-size: 17px; margin-right: 10px"">Sinovac</span>
-                  <span style="font-size: 20px;font-weight: bold;">30%</span>
+              <div class="h-legend spaced">
+                <div class="h-legend darkblue">
+                  <span class="legend-box">■</span>
+                  <span class="legend-label">Pfizer</span>
+                  <span class="legend-value">62%</span>
                 </div>
-                <div
-                  class="lightblue2"
-                  style="
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                  "
-                >
-                  <span style="font-size: 30px; margin-right: 10px">■</span>
-                  <span style="font-size: 17px; margin-right: 10px"">Astra</span>
-                  <span style="font-size: 20px; font-weight: bold;">8%</span>
+                <div class="h-legend lightblue">
+                  <span class="legend-box">■</span>
+                  <span class="legend-label">Sinovac</span>
+                  <span class="legend-value">30%</span>
+                </div>
+                <div class="h-legend lightblue2">
+                  <span class="legend-box">■</span>
+                  <span class="legend-label">Astra</span>
+                  <span class="legend-value">8%</span>
                 </div>
               </div>
-              <div class="vega-viz" id="waffle" style="margin-top: 10px"></div>
+              <div class="vega-viz" id="waffle" style="margin-top: 14px"></div>
             </div>
           </div>
           <p>
@@ -136,9 +104,7 @@
             supportive in getting vaccinated. Among the vaccines provided,
             <span class="important darkblue">Pfizer</span> from the US appears
             to be the
-            <span class="important darkblue"
-              >most preferred with 62% distribution rate</span
-            >. This is then followed by
+            <span class="important darkblue">most preferred with 62% distribution rate</span>. This is then followed by
             <span class="important lightblue">Sinovac</span> from China with
             <span class="important lightblue">30% distribution rate</span>.
           </p>
@@ -147,9 +113,12 @@
           <h2>Case Fatality Rate (CFR) by Age Group & Vax Status</h2>
           <div class="vega-viz" id="dotplot"></div>
           <p>
-            It appears that <span class="important brightred">Case Fatality Rate is the highest</span> among all age groups for <span class="important brightred">Unvaccinated</span> individuals, 
-            showing that vaccine are effective in reducing the risk of death. <span class="important lightred">Boosted</span> or <span class="important dimred">Fully Vaccinated</span>
-            people are generally <span class="important">safer</span> with the exception of older aged people where risk is higher. 
+            It appears that <span class="important brightred">Case Fatality Rate is the highest</span> among all age
+            groups for <span class="important brightred">Unvaccinated</span> individuals,
+            showing that vaccine are effective in reducing the risk of death.
+            <span class="important dimred">Fully Vaccinated</span> or <span class="important lightred">Boosted</span>
+            people are generally <span class="important">safer</span> with the exception of older aged people where risk
+            is higher.
           </p>
         </div>
         <div class="section">
@@ -159,27 +128,21 @@
               <div class="vega-viz" id="butterfly"></div>
             </div>
             <div style="width: 40%">
-              <div
-                style="
+              <div style="
                   display: flex;
                   flex-direction: column;
                   flex-grow: 1;
                   height: 470px;
-                "
-              >
+                ">
                 <h3 style="margin-top: 0px">Most Common Age Group</h3>
-                <span
-                  >Most death from <span class="important">Covid-19</span> comes from people of old age which
+                <span>Most death from <span class="important">Covid-19</span> comes from people of old age which
                   are above <span class="important">60 years old</span>. This
                   could be due to older people having more health complications
                   hence vaccines may not be applicable.
                 </span>
                 <h3 style="margin-top: 30px">Gender Affects Death Risk</h3>
-                <span
-                  >On average,
-                  <span class="important purple"
-                    >females has lower number of death</span
-                  >
+                <span>On average,
+                  <span class="important purple">females has lower number of death</span>
                   in each age group. Clinical research shows females has lower
                   risk from dying after hospitalization compared to males.
                 </span>
@@ -193,28 +156,29 @@
         Visualization by Tan Wei Chun
       </p>
     </div>
-  </body>
+</body>
+
 </html>
 <script>
   vegaEmbed("#choropleth", "js/choropleth.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#area", "js/area.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#dotplot", "js/dotplot.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#linebar", "js/linebar.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#waffle", "js/waffle.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#butterfly", "js/butterfly.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
   vegaEmbed("#waterfall", "js/waterfall.vg.json", { actions: false })
-    .then(function (result) {})
+    .then(function (result) { })
     .catch(console.error);
 </script>

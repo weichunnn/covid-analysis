@@ -26,7 +26,7 @@
         "y": {
           "field": "cases_new",
           "type": "quantitative",
-          "axis": { "title": "Daily Covid-19 Cases" },
+          "axis": { "title": "Daily COVID-19 Cases" },
           "scale": { "domain": [0, 40000] }
         }
       },
@@ -189,7 +189,7 @@
               "axis": {
                 "tickCount": 3,
                 "grid": false,
-                "title": "Daily Covid-19 Cases"
+                "title": "Daily COVID-19 Cases"
               }
             }
           }

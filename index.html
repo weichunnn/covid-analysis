@@ -46,7 +46,7 @@
           the increased travel activity.
         </p>
       </div>
-      <div class="section" style="position: relative;">
+      <div class="section" style="position: relative">
         <h2>Number of Death Reported by Months</h2>
         <div class="textbox" style="top: 135px;left: 550px; border-color: #3b82f6;
         ;">
@@ -68,7 +68,7 @@
         <h2>Economical Stress Level</h2>
         <span>Many industries and economies in Malaysia were affected by <span class=" important">COVID-19</span> and
           are struggling to recover. Click on the legend to filter for each stress level.</span>
-        <div class="textbox" style="top: 150px;left: 325px;">
+        <div class="textbox" style="top: 150px;left: 345px;">
           <p style="font-size: 14px;">
             <span class="important red" style="font-size: 15px;">Kedah, Kelantan and Perak</span> are
             affected the highest as they are
@@ -76,94 +76,94 @@
               industry</span> which was impacted heavily.
           </p>
         </div>
-        <div class="vega-viz" id="choropleth" "></div>
-        </div>
-        <div class=" section">
-          <h2>Distribution of Vaccines</h2>
-          <div class="h-section">
-            <div>
-              <h3>Distribution by Month</h3>
-              <div class="vega-viz" id="area" style="margin-right: 10px"></div>
-            </div>
-            <div style="margin-top: -80px;">
-              <h3>Distribution by All Time</h3>
-              <div class="h-legend spaced">
-                <div class="h-legend darkblue">
-                  <span class="legend-box">■</span>
-                  <span class="legend-label">Pfizer</span>
-                  <span class="legend-value">62%</span>
-                </div>
-                <div class="h-legend lightblue">
-                  <span class="legend-box">■</span>
-                  <span class="legend-label">Sinovac</span>
-                  <span class="legend-value">30%</span>
-                </div>
-                <div class="h-legend lightblue2">
-                  <span class="legend-box">■</span>
-                  <span class="legend-label">Astra</span>
-                  <span class="legend-value">8%</span>
-                </div>
-              </div>
-              <div class="vega-viz" id="waffle" style="margin-top: 14px"></div>
-            </div>
+        <div class="vega-viz" id="choropleth" style="left: 20px;"></div>
+      </div>
+      <div class=" section">
+        <h2>Distribution of Vaccines</h2>
+        <div class="h-section">
+          <div>
+            <h3>Distribution by Month</h3>
+            <div class="vega-viz" id="area" style="margin-right: 10px"></div>
           </div>
-          <p>
-            Since the release of the vaccines, Malaysians had been very
-            supportive of getting vaccinated. Among the vaccines provided,
-            <span class="important darkblue">Pfizer</span> from the US appears
-            to be the
-            most preferred with <span class="important darkblue">62% distribution rate</span>. This is then followed by
-            <span class="important lightblue">Sinovac</span> from China with
-            <span class="important lightblue">30% distribution rate</span>.
-          </p>
-        </div>
-        <div class="section">
-          <h2>Case Fatality Rate (CFR) by Age Group & Vax Status</h2>
-          <div class="vega-viz" id="dotplot"></div>
-          <p>
-            It appears that the <span class="important brightred">Case Fatality Rate is the highest</span> among all age
-            groups for <span class="important brightred">Unvaccinated</span> individuals,
-            showing that vaccines are effective in reducing the risk of death.
-            <span class="important dimred">Fully Vaccinated</span> or <span class="important lightred">Boosted</span>
-            people are generally <span class="important">safer</span> except for older aged people where the risk
-            is higher.
-          </p>
-        </div>
-        <div class="section">
-          <h2>Population Death by Age Group & Gender</h2>
-          <div class="h-section">
-            <div style="width: 55%">
-              <div class="vega-viz" id="butterfly"></div>
+          <div style="margin-top: -80px;">
+            <h3>Distribution by All Time</h3>
+            <div class="h-legend spaced">
+              <div class="h-legend darkblue">
+                <span class="legend-box">■</span>
+                <span class="legend-label">Pfizer</span>
+                <span class="legend-value">62%</span>
+              </div>
+              <div class="h-legend lightblue">
+                <span class="legend-box">■</span>
+                <span class="legend-label">Sinovac</span>
+                <span class="legend-value">30%</span>
+              </div>
+              <div class="h-legend lightblue2">
+                <span class="legend-box">■</span>
+                <span class="legend-label">Astra</span>
+                <span class="legend-value">8%</span>
+              </div>
             </div>
-            <div style="width: 40%;">
-              <div style="
+            <div class="vega-viz" id="waffle" style="margin-top: 14px"></div>
+          </div>
+        </div>
+        <p>
+          Since the release of the vaccines, Malaysians had been very
+          supportive of getting vaccinated. Among the vaccines provided,
+          <span class="important darkblue">Pfizer</span> from the US appears
+          to be the
+          most preferred with <span class="important darkblue">62% distribution rate</span>. This is then followed by
+          <span class="important lightblue">Sinovac</span> from China with
+          <span class="important lightblue">30% distribution rate</span>.
+        </p>
+      </div>
+      <div class="section">
+        <h2>Case Fatality Rate (CFR) by Age Group & Vax Status</h2>
+        <div class="vega-viz" id="dotplot"></div>
+        <p>
+          It appears that the <span class="important brightred">Case Fatality Rate is the highest</span> among all age
+          groups for <span class="important brightred">Unvaccinated</span> individuals,
+          showing that vaccines are effective in reducing the risk of death.
+          <span class="important dimred">Fully Vaccinated</span> or <span class="important lightred">Boosted</span>
+          people are generally <span class="important">safer</span> except for older aged people where the risk
+          is higher.
+        </p>
+      </div>
+      <div class="section">
+        <h2>Population Death by Age Group & Gender</h2>
+        <div class="h-section">
+          <div style="width: 55%">
+            <div class="vega-viz" id="butterfly"></div>
+          </div>
+          <div style="width: 40%;">
+            <div style="
                   display: flex;
                   flex-direction: column;
                   flex-grow: 1;
                   margin-top: -95px;
                 ">
-                <h3 style="margin-top: 0px">Most Common Age Group</h3>
-                <span>Most death from <span class="important">COVID-19</span> comes from people of old age which
-                  are above <span class="important">60 years old</span>. This
-                  could be due to older people having more health complications
-                  hence vaccines may not be applicable.
-                </span>
-                <h3 style="margin-top: 50px">Gender Affects Death Risk</h3>
-                <span>On average,
-                  <span class="important purple">females have a lower number of deaths</span>
-                  in each age group. Clinical research shows that females have a lower risk of dying after
-                  hospitalization
-                  compared to males.
-                </span>
-              </div>
+              <h3 style="margin-top: 0px">Most Common Age Group</h3>
+              <span>Most death from <span class="important">COVID-19</span> comes from people of old age which
+                are above <span class="important">60 years old</span>. This
+                could be due to older people having more health complications
+                hence vaccines may not be applicable.
+              </span>
+              <h3 style="margin-top: 50px">Gender Affects Death Risk</h3>
+              <span>On average,
+                <span class="important purple">females have a lower number of deaths</span>
+                in each age group. Clinical research shows that females have a lower risk of dying after
+                hospitalization
+                compared to males.
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <p style="width: 100%; text-align: right">
-        Visualization by Tan Wei Chun
-      </p>
     </div>
+    <p style="width: 100%; text-align: right">
+      Visualization by Tan Wei Chun
+    </p>
+  </div>
 </body>
 
 </html>

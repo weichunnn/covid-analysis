@@ -107,14 +107,18 @@
               {
                 "x": "2021-07-01",
                 "y": 1,
-                "labels": ["Government declared", "Pfizer as main vaccine", " "]
+                "labels": [
+                  "Government declared",
+                  "Pfizer as main vaccine",
+                  "used nationwide"
+                ]
               },
               {
                 "x": "2022-01-01",
                 "y": 0.5,
                 "labels": [
                   "First batch of Astra",
-                  "receipients after",
+                  "recipients after",
                   "6 months wait"
                 ]
               }

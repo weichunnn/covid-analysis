@@ -61,14 +61,7 @@
       },
       { "age": "80+", "type": "Unvaccinated", "value": 9.283779717123082 },
       { "age": "80+", "type": "Boosted", "value": 2.719762368885176 },
-      { "age": "80+", "type": "Fully Vaccinated", "value": 8.648081534772183 },
-      { "age": "Overall", "type": "Unvaccinated", "value": 2.0684357541899443 },
-      { "age": "Overall", "type": "Boosted", "value": 0.09619739029418962 },
-      {
-        "age": "Overall",
-        "type": "Fully Vaccinated",
-        "value": 0.3784398927783601
-      }
+      { "age": "80+", "type": "Fully Vaccinated", "value": 8.648081534772183 }
     ]
   },
   "encoding": {
@@ -119,7 +112,7 @@
           "legend": {
             "orient": "none",
             "legendX": 710,
-            "legendY": 10,
+            "legendY": 16,
             "labelFontSize": 12,
             "titleFontSize": 13,
             "symbolSize": 135

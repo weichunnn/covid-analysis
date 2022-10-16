@@ -168,6 +168,7 @@
     {
       "width": 880,
       "height": 100,
+      "title": "Drag to zoom in on the chart",
       "layer": [
         {
           "mark": { "type": "bar", "size": 2, "color": "#bfd8ff" },

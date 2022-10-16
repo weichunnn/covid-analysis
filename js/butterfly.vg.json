@@ -25,7 +25,7 @@
         "x": {
           "aggregate": "sum",
           "field": "counts",
-          "title": "Population",
+          "title": "Population Count",
           "sort": "descending"
         },
         "color": {
@@ -67,7 +67,7 @@
         "x": {
           "aggregate": "sum",
           "field": "counts",
-          "title": "Population"
+          "title": "Population Count"
         },
         "color": { "field": "gender", "legend": null, "title": "Gender" }
       }
